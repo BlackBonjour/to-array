@@ -1,0 +1,43 @@
+{
+  "name": "blackbonjour/to-array",
+  "type": "library",
+  "description": "Converts any object to array",
+  "keywords": [
+    "PHP",
+    "object",
+    "array",
+    "converter"
+  ],
+  "homepage": "https://github.com/BlackBonjour/to-array",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Erick Dyck",
+      "email": "info@erickdyck.de",
+      "homepage": "http://www.erickdyck.de"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/BlackBonjour/to-array/issues",
+    "wiki": "https://github.com/BlackBonjour/to-array/wiki",
+    "source": "https://github.com/BlackBonjour/to-array"
+  },
+  "require": {
+    "php": ">=7.1"
+  },
+  "require-dev": {
+    "phpmd/phpmd": "2.*",
+    "phpunit/phpunit": "7.*",
+    "squizlabs/php_codesniffer": "3.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "BlackBonjour\\ToArray\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "BlackBonjourTest\\ToArray\\": "test/"
+    }
+  }
+}
