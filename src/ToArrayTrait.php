@@ -22,11 +22,19 @@ trait ToArrayTrait
     {
         $data = (array) $this;
 
-        array_walk($data, function (&$value) {
+        foreach ($data as $prop => &$value) {
             if (\is_object($value)) {
                 $value = method_exists($value, 'toArray') ? $value->toArray() : (array) $value;
             }
-        });
+
+            if (strpos($prop, "\0") !== false) {
+                unset($data[$prop]);
+
+                $tmp         = explode("\0", $prop);
+                $prop        = end($tmp);
+                $data[$prop] = $value;
+            }
+        }
 
         return $data;
     }
