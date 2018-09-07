@@ -13,7 +13,7 @@ use BlackBonjour\ToArray\ToArrayTrait;
  * @package   BlackBonjourTest\ToArray
  * @copyright Copyright (c) 2018 Erick Dyck
  */
-class ExampleModel
+class ExampleModelA
 {
     use ToArrayTrait;
 

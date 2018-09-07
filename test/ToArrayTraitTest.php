@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace BlackBonjourTest\ToArray;
 
 use PHPUnit\Framework\TestCase;
+use stdClass;
 
 /**
  * Unit test for to array trait
@@ -17,13 +18,24 @@ class ToArrayTraitTest extends TestCase
 {
     public function testToArray(): void
     {
-        $model       = new ExampleModel('foo', 123, 19.95);
-        $expectation = [
+        $stdClass      = new stdClass;
+        $stdClass->foo = 'FooBar';
+        $modelA        = new ExampleModelA('foo', 123, 19.95);
+        $modelB        = new ExampleModelB($stdClass, $modelA);
+        $expectationA  = [
             'foo' => 'foo',
             'bar' => 123,
             'baz' => 19.95,
         ];
 
-        self::assertEquals($expectation, $model->toArray());
+        $expectationB = [
+            'modelA' => $expectationA,
+            'object' => [
+                'foo' => 'FooBar',
+            ],
+        ];
+
+        self::assertEquals($expectationA, $modelA->toArray());
+        self::assertEquals($expectationB, $modelB->toArray());
     }
 }
