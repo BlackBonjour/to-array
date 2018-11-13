@@ -1,4 +1,5 @@
 <?php
+/** @noinspection PhpUnhandledExceptionInspection */
 declare(strict_types=1);
 
 namespace BlackBonjourTest\ToArray;
@@ -35,7 +36,13 @@ class ToArrayTraitTest extends TestCase
             ],
         ];
 
+        $expectationC = [
+            'modelA' => $modelA,
+            'object' => $stdClass,
+        ];
+
         self::assertEquals($expectationA, $modelA->toArray());
         self::assertEquals($expectationB, $modelB->toArray());
+        self::assertEquals($expectationC, $modelB->toArray(false));
     }
 }

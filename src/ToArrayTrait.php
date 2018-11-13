@@ -16,14 +16,15 @@ trait ToArrayTrait
     /**
      * Converts current object to array
      *
+     * @param boolean $convertSubObjects
      * @return array
      */
-    public function toArray(): array
+    public function toArray(bool $convertSubObjects = true): array
     {
         $data = (array) $this;
 
         foreach ($data as $prop => &$value) {
-            if (\is_object($value)) {
+            if ($convertSubObjects && \is_object($value)) {
                 $value = method_exists($value, 'toArray') ? $value->toArray() : (array) $value;
             }
 
