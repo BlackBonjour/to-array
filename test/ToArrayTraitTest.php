@@ -23,6 +23,7 @@ class ToArrayTraitTest extends TestCase
         $stdClass->foo = 'FooBar';
         $modelA        = new ExampleModelA('foo', 123, 19.95);
         $modelB        = new ExampleModelB($stdClass, $modelA);
+        $modelC        = new ExampleModelC([$stdClass], $modelA);
         $expectationA  = [
             'foo' => 'foo',
             'bar' => 123,
@@ -37,12 +38,21 @@ class ToArrayTraitTest extends TestCase
         ];
 
         $expectationC = [
-            'modelA' => $modelA,
-            'object' => $stdClass,
+            'modelA'  => $expectationA,
+            'objects' => [
+                ['foo' => 'FooBar'],
+            ],
         ];
 
         self::assertEquals($expectationA, $modelA->toArray());
         self::assertEquals($expectationB, $modelB->toArray());
-        self::assertEquals($expectationC, $modelB->toArray(false));
+        self::assertEquals($expectationC, $modelC->toArray());
+
+        $expectationConvertSubObjectsFalse = [
+            'modelA' => $modelA,
+            'object' => $stdClass,
+        ];
+
+        self::assertEquals($expectationConvertSubObjectsFalse, $modelB->toArray(false));
     }
 }
